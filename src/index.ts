@@ -30,7 +30,6 @@ let page: Page | null = null;
     const browser = await pupp.initBrowser();
     const context = await pupp.initContext(browser);
     await zhihu.onLogin(userInfo, context)
-    // page = await zhihu.goto(config.infoUrl, context);
     const pages = await context.pages();
     page = pages[0];
     const title = await page.title();

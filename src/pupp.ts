@@ -1,7 +1,13 @@
 import puppeteer, { Browser, BrowserContext } from "puppeteer";
+import os from "os";
 class Pupp {
     public async initBrowser(browserUrl?: string): Promise<Browser> {
-        const executablePath = browserUrl || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+        const isWin = os.platform() === "win32";
+        let defaultUrl = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+        if (!isWin) {
+            defaultUrl = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+        }
+        const executablePath = browserUrl || defaultUrl;
         const browser = await puppeteer.launch({
             headless: false,
             slowMo: 100,
